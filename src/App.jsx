@@ -1,11 +1,13 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Home, Profile, Offers, SignIn, SignUp, ForgotPassword } from "./pages";
+import { Header } from "./pages/Components";
 
 function App() {
 	return (
 		<>
 			<Router>
+				<Header />
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/proflie" element={<Profile />} />
