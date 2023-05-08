@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
 	const location = useLocation();
@@ -10,6 +10,7 @@ const Header = () => {
 		if (route === location.pathname) {
 			return true;
 		}
+		return false;
 	};
 	return (
 		<div className="bg-white border-b shadow-sm sticky top-0 z-50">
@@ -26,7 +27,7 @@ const Header = () => {
 					<ul className="flex space-x-10">
 						<li
 							className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
-								pathMatchRoute("/") && "text-black border-b-red-500"
+								pathMatchRoute("/") && "text-red-600 border-b-red-600"
 							}`}
 							onClick={() => navigate("/")}
 						>
@@ -34,7 +35,7 @@ const Header = () => {
 						</li>
 						<li
 							className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
-								pathMatchRoute("/offers") && "text-black border-b-red-500"
+								pathMatchRoute("/offers") && "text-red-600 border-b-red-600"
 							}`}
 							onClick={() => navigate("/offers")}
 						>
@@ -42,7 +43,7 @@ const Header = () => {
 						</li>
 						<li
 							className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
-								pathMatchRoute("/sign-in") && "text-black border-b-red-500"
+								pathMatchRoute("/sign-in") && "text-red-600 border-b-red-600"
 							}`}
 							onClick={() => navigate("/sign-in")}
 						>
