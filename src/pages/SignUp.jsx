@@ -1,8 +1,16 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import OAuth from "./Components/OAuth";
+import {
+	getAuth,
+	createUserWithEmailAndPassword,
+	updateProfile,
+} from "firebase/auth";
+import { db, doc } from "../firebase.config";
+import { serverTimestamp, setDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
 	const [showPassword, setShowPassword] = useState(false);
@@ -11,15 +19,42 @@ const SignUp = () => {
 		email: "",
 		password: "",
 	});
-
 	const { name, email, password } = formData;
 
-	const onChange = (e) => {
+	const navigate = useNavigate();
+
+	function onChange(e) {
 		setFormData((prevState) => ({
 			...prevState,
 			[e.target.id]: e.target.value,
 		}));
-	};
+	}
+	async function onSubmit(e) {
+		e.preventDefault();
+
+		try {
+			const auth = getAuth();
+			const userCredential = await createUserWithEmailAndPassword(
+				auth,
+				email,
+				password
+			);
+
+			updateProfile(auth.currentUser, {
+				displayName: name,
+			});
+			const user = userCredential.user;
+			const formDataCopy = { ...formData };
+			delete formDataCopy.password;
+			formDataCopy.timestamp = serverTimestamp();
+
+			await setDoc(doc(db, "users", user.uid), formDataCopy);
+			toast.success("Successfully signed up!");
+			navigate("/");
+		} catch (error) {
+			toast.error("Something went wrong!");
+		}
+	}
 
 	return (
 		<section>
@@ -33,7 +68,7 @@ const SignUp = () => {
 					/>
 				</div>
 				<div className="w-full md:w-[67%] lg:w-[40%]">
-					<form>
+					<form onSubmit={onSubmit}>
 						<input
 							className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded-md transition ease-in-out mb-6"
 							type="text"
