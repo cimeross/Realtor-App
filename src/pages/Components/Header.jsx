@@ -1,10 +1,24 @@
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const Header = () => {
+	const [pageState, setPageState] = useState("Sign in");
 	const location = useLocation();
 	const navigate = useNavigate();
+
+	const auth = getAuth();
+
+	useEffect(() => {
+		onAuthStateChanged(auth, (user) => {
+			if (user) {
+				setPageState("Profile");
+			} else {
+				setPageState("Sign in");
+			}
+		});
+	}, [auth]);
 
 	const pathMatchRoute = (route) => {
 		if (route === location.pathname) {
@@ -43,11 +57,12 @@ const Header = () => {
 						</li>
 						<li
 							className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
-								pathMatchRoute("/sign-in") && "text-red-600 border-b-red-600"
+								(pathMatchRoute("/sign-in") || pathMatchRoute("/profile")) &&
+								"text-red-600 border-b-red-600"
 							}`}
-							onClick={() => navigate("/sign-in")}
+							onClick={() => navigate("/profile")}
 						>
-							Sign In
+							{pageState}
 						</li>
 					</ul>
 				</div>
