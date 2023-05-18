@@ -8,7 +8,6 @@ import { db } from "../firebase.config";
 import {
 	collection,
 	doc,
-	getDoc,
 	getDocs,
 	orderBy,
 	query,
@@ -85,6 +84,7 @@ const Profile = () => {
 		}
 		fetchUserListings();
 	}, [auth.currentUser.uid]);
+
 	return (
 		<>
 			<section className="max-w-6xl mx-auto flex flex-col justify-center items-center ">
@@ -155,8 +155,6 @@ const Profile = () => {
 									key={listing.id}
 									id={listing.id}
 									listing={listing.data}
-									// onDelete={() => onDelete(listing.id)}
-									// onEdit={() => onEdit(listing.id)}
 								/>
 							))}
 						</ul>
