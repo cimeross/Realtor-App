@@ -9,6 +9,7 @@ import {
 	ForgotPassword,
 	CreateListing,
 	EditListing,
+	Listing,
 } from "./pages";
 import { Header, PrivateRoute } from "./pages/Components";
 import { ToastContainer } from "react-toastify";
@@ -24,6 +25,7 @@ function App() {
 					<Route path="/profile" element={<PrivateRoute />}>
 						<Route path="/profile" element={<Profile />} />
 					</Route>
+					<Route path="/category/:categoryName/:listingId" element={<Listing />} />
 					<Route path="/offers" element={<Offers />} />
 					<Route path="/sign-in" element={<SignIn />} />
 					<Route path="/sign-up" element={<SignUp />} />
