@@ -33,7 +33,7 @@ const Contact = ({ userRef, listing }) => {
 					<p>
 						Contact {landLord.name} for the {listing.name.toLowerCase()}
 					</p>
-					<div className="flex flex-col w-full mt-3 mb-6">
+					<div className="flex flex-col w-full mt-3 mb-5">
 						<textarea
 							name="message"
 							id="message"
