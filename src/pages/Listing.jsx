@@ -14,12 +14,17 @@ import "swiper/css/bundle";
 import { BsShareFill } from "react-icons/bs";
 import { ImLocation2 } from "react-icons/im";
 import { FaBed, FaBath, FaParking, FaChair } from "react-icons/fa";
+import { getAuth } from "firebase/auth";
+import Contact from "./Components/Contact";
 
 const Listing = () => {
 	const params = useParams();
 	const [listing, setLisitng] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [shareLinkCopied, setShareLinkCopied] = useState(false);
+	const [contactLandLord, setContactLandLord] = useState(false);
+
+	const auth = getAuth();
 
 	SwiperCore.use([Autoplay, Navigation, Pagination]);
 	useEffect(() => {
@@ -36,6 +41,7 @@ const Listing = () => {
 	if (loading) {
 		return <Spinner />;
 	}
+
 	return (
 		<main>
 			<Swiper
@@ -76,7 +82,7 @@ const Listing = () => {
 				</p>
 			)}
 			<div className="m-4 lg:mx-auto p-4 flex flex-col md:flex-row max-w-6xl  shadow-md bg-white lg:space-x-5">
-				<div className="w-full  h-[200px] lg:h-[400px]">
+				<div className="w-full  lg:h-[400px]">
 					<p className="text-2xl font-bold mb-3 text-blue-900">
 						{listing.name} - ${" "}
 						{listing.offer
@@ -106,7 +112,7 @@ const Listing = () => {
 						<span className="font-semibold">Description - </span>
 						{listing.description}
 					</p>
-					<ul className="flex items-center space-x-2 lg:space-x-10 text-sm font-semibold text-slate-800">
+					<ul className="flex items-center space-x-2 lg:space-x-10 text-sm font-semibold text-slate-800 mb-6">
 						<li className="flex items-center">
 							<FaBed className="mr-1 text-lg whitespace-nowrap" />
 							{+listing.bedrooms > 1 ? `${+listing.bedrooms} Beds` : "1 Bed"}
@@ -126,6 +132,19 @@ const Listing = () => {
 							{listing.furnished ? "Furnished" : "Not furnished"}
 						</li>
 					</ul>
+					{listing.userRef !== auth.currentUser?.uid && !contactLandLord && (
+						<div className="mt-6">
+							<button
+								className="px-7 py-3 bg-blue-600 text-white font-medium text-sm uppercase w-full rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg text-center transition duration-150 ease-in-out"
+								onClick={() => setContactLandLord(true)}
+							>
+								Contact Landlord
+							</button>
+						</div>
+					)}
+					{contactLandLord && (
+						<Contact userRef={listing.userRef} listing={listing} />
+					)}
 				</div>
 				<div className="w-full  h-[200px] lg:h-[400px] overflow-x-hidden"></div>
 			</div>
