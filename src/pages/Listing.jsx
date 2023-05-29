@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { db, doc } from "../firebase.config";
 import { getDoc } from "firebase/firestore";
-import Spinner from "./components/Spinner";
+import Spinner from "./Components/Spinner";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, {
 	EffectFade,
