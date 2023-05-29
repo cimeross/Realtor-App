@@ -88,29 +88,29 @@ export default function CreateListing() {
 			toast.error("maximum 6 images are allowed");
 			return;
 		}
-		// let geolocation = {};
-		// let location;
-		// if (geolocationEnabled) {
-		// 	const response = await fetch(
-		// 		// eslint-disable-next-line no-undef
-		// 		`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`
-		// 	);
-		// 	const data = await response.json();
-		// 	console.log(data);
-		// 	geolocation.lat = data.results[0]?.geometry.location.lat ?? 0;
-		// 	geolocation.lng = data.results[0]?.geometry.location.lng ?? 0;
+		let geolocation = {};
+		let location;
+		if (geolocationEnabled) {
+			const response = await fetch(
+				// eslint-disable-next-line no-undef
+				`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`
+			);
+			const data = await response.json();
+			console.log(data);
+			geolocation.lat = data.results[0]?.geometry.location.lat ?? 0;
+			geolocation.lng = data.results[0]?.geometry.location.lng ?? 0;
 
-		// 	location = data.status === "ZERO_RESULTS" && undefined;
+			location = data.status === "ZERO_RESULTS" && undefined;
 
-		// 	if (location === undefined) {
-		// 		setLoading(false);
-		// 		toast.error("please enter a correct address");
-		// 		return;
-		// 	}
-		// } else {
-		// 	geolocation.lat = latitude;
-		// 	geolocation.lng = longitude;
-		// }
+			if (location === undefined) {
+				setLoading(false);
+				toast.error("please enter a correct address");
+				return;
+			}
+		} else {
+			geolocation.lat = latitude;
+			geolocation.lng = longitude;
+		}
 
 		async function storeImage(image) {
 			return new Promise((resolve, reject) => {
@@ -161,7 +161,7 @@ export default function CreateListing() {
 		const formDataCopy = {
 			...formData,
 			imgUrls,
-			//geolocation,
+			geolocation,
 			timestamp: serverTimestamp(),
 			userRef: auth.currentUser.uid,
 		};
