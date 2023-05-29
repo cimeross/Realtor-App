@@ -47,10 +47,10 @@ const Listing = () => {
 			<Swiper
 				slidesPerView={1}
 				navigation
-				pagination={{ type: "progressbar" }}
+				//pagination={{ type: "progressbar" }}
 				effect="fade"
 				modules={[EffectFade]}
-				autoplay={{ delay: 3000 }}
+				//autoplay={{ delay: 9000 }}
 			>
 				{listing.imgUrls.map((url, index) => (
 					<SwiperSlide key={index}>
@@ -146,7 +146,28 @@ const Listing = () => {
 						<Contact userRef={listing.userRef} listing={listing} />
 					)}
 				</div>
-				<div className="w-full  h-[200px] lg:h-[400px] overflow-x-hidden"></div>
+				<div className="w-full  h-[200px] lg:h-[400px] overflow-x-hidden">
+					<Swiper
+						slidesPerView={1}
+						navigation
+						pagination={{ type: "progressbar" }}
+						effect="fade"
+						modules={[EffectFade]}
+						autoplay={{ delay: 3000 }}
+					>
+						{listing.imgUrls.map((url, index) => (
+							<SwiperSlide key={index}>
+								<div
+									className="relative w-full overflow-hidden h-[350px]"
+									style={{
+										background: `url(${listing.imgUrls[index]}) center no-repeat`,
+										backgroundSize: "cover",
+									}}
+								></div>
+							</SwiperSlide>
+						))}
+					</Swiper>
+				</div>
 			</div>
 		</main>
 	);
