@@ -136,7 +136,7 @@ const Listing = () => {
 						<div className="mt-6">
 							<button
 								className="px-7 py-3 bg-blue-600 text-white font-medium text-sm uppercase w-full rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg text-center transition duration-150 ease-in-out"
-								onClick={() => setContactLandLord(true)}
+								onClick={() => setContactLandLord(false)}
 							>
 								Contact Landlord
 							</button>
