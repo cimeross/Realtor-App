@@ -29,18 +29,23 @@ const Header = () => {
 	return (
 		<div className="bg-white border-b shadow-sm sticky top-0 z-40">
 			<header className="flex justify-between items-center px-3 max-w-6xl mx-auto">
-				<div>
+				<div className="flex justify-between items-center ">
 					<img
-						src="https://static.rdc.moveaws.com/images/logos/rdc-logo-default.svg"
+						src="/favicon.ico"
 						alt="logo"
-						className="h-5 cursor-pointer"
-						onClick={() => navigate("/")}
+						className="p-2 max-w-[45px] max-h-[45px]"
 					/>
+					<h1
+						className="text-gray-900 font-semibold text-2xl"
+						onClick={() => navigate("/")}
+					>
+						Horizon Properties
+					</h1>
 				</div>
 				<div>
 					<ul className="flex space-x-10">
 						<li
-							className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
+							className={`cursor-pointer py-3 text-base font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
 								pathMatchRoute("/") && "text-red-600 border-b-red-600"
 							}`}
 							onClick={() => navigate("/")}
@@ -48,7 +53,7 @@ const Header = () => {
 							Home
 						</li>
 						<li
-							className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
+							className={`cursor-pointer py-3 text-base font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
 								pathMatchRoute("/offers") && "text-red-600 border-b-red-600"
 							}`}
 							onClick={() => navigate("/offers")}
@@ -56,7 +61,7 @@ const Header = () => {
 							Offers
 						</li>
 						<li
-							className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
+							className={`cursor-pointer py-3 text-base font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
 								(pathMatchRoute("/sign-in") || pathMatchRoute("/profile")) &&
 								"text-red-600 border-b-red-600"
 							}`}
