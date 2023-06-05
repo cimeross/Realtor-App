@@ -29,11 +29,14 @@ const Header = () => {
 	return (
 		<div className="bg-white border-b shadow-sm sticky top-0 z-40">
 			<header className="flex justify-between items-center px-3 max-w-6xl mx-auto">
-				<div className="flex justify-between items-center ">
+				<div
+					className="flex justify-between items-center cursor-pointer"
+					onClick={() => navigate("/")}
+				>
 					<img
 						src="/favicon.ico"
 						alt="logo"
-						className="p-2 max-w-[45px] max-h-[45px]"
+						className="p-2 max-w-[45px] max-h-[45px] "
 					/>
 					<h1
 						className="text-gray-900 font-semibold text-2xl"
