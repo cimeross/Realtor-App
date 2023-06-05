@@ -82,7 +82,7 @@ const Listing = () => {
 				</p>
 			)}
 			<div className="m-4 lg:mx-auto p-4 flex flex-col md:flex-row max-w-6xl  shadow-md bg-white lg:space-x-5">
-				<div className="w-full  lg:h-[400px]">
+				<div className="w-full  lg:h-[450px]">
 					<p className="text-2xl font-bold mb-3 text-blue-900">
 						{listing.name} - ${" "}
 						{listing.offer
