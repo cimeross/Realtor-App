@@ -83,7 +83,7 @@ const Listing = () => {
 			)}
 			<div className="m-4 lg:mx-auto p-4 flex flex-col md:flex-row max-w-6xl  shadow-md bg-white lg:space-x-5">
 				<div className="w-full  lg:h-[450px]">
-					<p className="text-2xl font-bold mb-3 text-blue-900">
+					<p className="text-xl md:text-2xl font-bold mb-3 text-blue-900">
 						{listing.name} - ${" "}
 						{listing.offer
 							? listing.discountedPrice
@@ -94,16 +94,16 @@ const Listing = () => {
 									.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
 						{listing.type === "rent" ? " / month" : ""}
 					</p>
-					<p className="flex items-center mt-6 mb-3 font-semibold ">
+					<p className="flex items-center mt-6 mb-3 font-semibold text-sm md:text-base">
 						<ImLocation2 className="text-green-700 mr-1" />
 						{listing.address}
 					</p>
-					<div className="flex justify-start items-center space-x-4 w-[75%]">
+					<div className="flex justify-start items-center space-x-4 w-[85%]">
 						<p className="bg-red-800 w-full max-w-[200px] rounded-md p-1 text-white text-center font-semibold shadow-md">
 							{listing.type === "rent" ? "Rent" : "Sale"}
 						</p>
 						{listing.offer && (
-							<p className="w-full max-w-[200px] bg-green-800 rounded-md p-1 text-white text-center font-semibold shadow-md">
+							<p className="w-full max-w-[250px] bg-green-800 rounded-md p-1 text-white text-center font-semibold shadow-md">
 								${+listing.regularPrice - +listing.discountedPrice} discount
 							</p>
 						)}
@@ -112,30 +112,30 @@ const Listing = () => {
 						<span className="font-semibold">Description - </span>
 						{listing.description}
 					</p>
-					<ul className="flex items-center space-x-2 lg:space-x-10 text-sm font-semibold text-slate-800 mb-6">
+					<ul className="flex items-center space-x-2 lg:space-x-10 text-xs md:text-sm font-semibold text-slate-800 mb-6">
 						<li className="flex items-center">
-							<FaBed className="mr-1 text-lg whitespace-nowrap" />
+							<FaBed className="mr-1 text-base md:text-lg whitespace-nowrap" />
 							{+listing.bedrooms > 1 ? `${+listing.bedrooms} Beds` : "1 Bed"}
 						</li>
 						<li className="flex items-center">
-							<FaBath className="mr-1 text-lg whitespace-nowrap" />
+							<FaBath className="mr-1 text-base md:text-lg whitespace-nowrap" />
 							{+listing.bathrooms > 1
 								? `${+listing.bathrooms} Baths`
 								: "1 Bath"}
 						</li>
 						<li className="flex items-center">
-							<FaParking className="mr-1 text-lg whitespace-nowrap" />
+							<FaParking className="mr-1 text-base md:text-lg whitespace-nowrap" />
 							{listing.parking ? "Parking Spot" : "No Parking"}
 						</li>
 						<li className="flex items-center">
-							<FaChair className="mr-1 text-lg whitespace-nowrap" />
+							<FaChair className="mr-1 text-base md:text-lg whitespace-nowrap" />
 							{listing.furnished ? "Furnished" : "Not furnished"}
 						</li>
 					</ul>
 					{listing.userRef !== auth.currentUser?.uid && !contactLandLord && (
 						<div className="mt-6">
 							<button
-								className="px-7 py-3 bg-blue-600 text-white font-medium text-sm uppercase w-full rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg text-center transition duration-150 ease-in-out"
+								className="px-7 py-3 mb-2 bg-blue-600 text-white font-medium text-sm uppercase w-full rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg text-center transition duration-150 ease-in-out"
 								onClick={() => setContactLandLord(false)}
 							>
 								Contact Landlord
@@ -146,7 +146,7 @@ const Listing = () => {
 						<Contact userRef={listing.userRef} listing={listing} />
 					)}
 				</div>
-				<div className="w-full  h-[200px] lg:h-[400px] overflow-x-hidden">
+				<div className="w-full  h-full lg:h-[400px] overflow-x-hidden">
 					<Swiper
 						slidesPerView={1}
 						navigation

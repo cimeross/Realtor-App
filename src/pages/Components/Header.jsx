@@ -39,14 +39,14 @@ const Header = () => {
 						className="p-2 max-w-[45px] max-h-[45px] "
 					/>
 					<h1
-						className="text-gray-900 font-semibold text-2xl"
+						className="text-gray-900 hidden font-semibold text-xl md:text-lg md:block lg:text-2xl"
 						onClick={() => navigate("/")}
 					>
 						Horizon Properties
 					</h1>
 				</div>
 				<div>
-					<ul className="flex space-x-10">
+					<ul className="flex space-x-6 md:space-x-10">
 						<li
 							className={`cursor-pointer py-3 text-base font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
 								pathMatchRoute("/") && "text-red-600 border-b-red-600"
