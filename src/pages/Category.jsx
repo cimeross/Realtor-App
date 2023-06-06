@@ -12,11 +12,13 @@ import { toast } from "react-toastify";
 import { db } from "../firebase.config";
 import Spinner from "./components/Spinner";
 import ListingItem from "./Components/ListingItem";
+import { useParams } from "react-router";
 
-const Offers = () => {
+const Category = () => {
 	const [listings, setListings] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [lastFetchListing, setLastFetchListing] = useState(null);
+	const params = useParams();
 
 	useEffect(() => {
 		const fetchListings = async () => {
@@ -24,7 +26,7 @@ const Offers = () => {
 				const listingRef = collection(db, "listings");
 				const q = query(
 					listingRef,
-					where("offer", "==", true),
+					where("type", "==", params.categoryName),
 					orderBy("timestamp", "desc"),
 					limit(8)
 				);
@@ -45,14 +47,14 @@ const Offers = () => {
 			}
 		};
 		fetchListings();
-	}, []);
+	}, [params.categoryName]);
 
 	const onFetchMoreListings = async () => {
 		try {
 			const listingRef = collection(db, "listings");
 			const q = query(
 				listingRef,
-				where("offer", "==", true),
+				where("type", "==", params.categoryName),
 				orderBy("timestamp", "desc"),
 				startAfter(lastFetchListing),
 				limit(4)
@@ -76,13 +78,15 @@ const Offers = () => {
 
 	return (
 		<div className="max-w-6xl mx-auto px-3">
-			<h1 className="text-3xl text-center my-6 font-bold">Offers</h1>
+			<h1 className="text-3xl text-center my-6 font-bold">
+				{params.categoryName === "rent" ? "Places for rent" : "Places for sale"}
+			</h1>
 			{loading ? (
 				<Spinner />
 			) : listings && listings.length > 0 ? (
 				<>
 					<main>
-						<ul className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
+						<ul className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 							{listings.map((listing) => (
 								<ListingItem
 									key={listing.id}
@@ -110,4 +114,4 @@ const Offers = () => {
 	);
 };
 
-export default Offers;
+export default Category;
