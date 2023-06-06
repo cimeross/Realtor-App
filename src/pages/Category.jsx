@@ -10,7 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { db } from "../firebase.config";
-import Spinner from "./components/Spinner";
+import Spinner from "./Components/Spinner";
 import ListingItem from "./Components/ListingItem";
 import { useParams } from "react-router";
 
